@@ -2,6 +2,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { storiesOf } from '@storybook/react';
+import { select, text, boolean } from "@storybook/addon-knobs";
 
 import * as icons from './index.js';
 import Arrow from './icons/Arrow';
@@ -62,6 +63,13 @@ storiesOf('Icons', module)
       <React.Fragment>
         <GroupContainer>
           <GroupName>Normal Arrow</GroupName>
+          <Container>
+            <Arrow
+              thin={boolean('thin', false)}
+              direction={select('direction', ['up', 'down', 'left', 'right'], 'right')}
+              fontSize={text('fontSize', '18px')}
+            />
+          </Container>
           <Container>
             <Arrow fontSize="18px" direction="up" />
           </Container>
