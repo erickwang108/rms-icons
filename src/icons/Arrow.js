@@ -4,6 +4,10 @@ import PropTypes from 'prop-types';
 import Wrapper from '../Wrapper';
 
 function getTransform(direction) {
+  if (typeof direction === 'number') {
+    return `rotate(${direction})`;
+  }
+
   switch (direction) {
     case 'down': {
       return 'rotate(90)';
