@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 
@@ -24,11 +24,18 @@ const Container = styled.svg`
   }
 `;
 
-const Wrapper = React.forwardRef((props, ref) => {
-  const { title, children, ...restProps } = props;
+const Wrapper = React.forwardRef((props, fwdRef) => {
+  const ref = fwdRef || createRef();
+  const { title, viewBox, children, ...restProps } = props;
 
   return (
-    <Container width="1em" height="1em" viewBox="0 0 20 20" {...restProps} ref={ref}>
+    <Container
+      width="1em"
+      height="1em"
+      ref={ref}
+      viewBox={viewBox}
+      {...restProps}
+    >
       <title>{title}</title>
       {children}
     </Container>
@@ -37,7 +44,12 @@ const Wrapper = React.forwardRef((props, ref) => {
 
 Wrapper.propTypes = {
   title: PropTypes.any,
+  viewBox: PropTypes.string,
   children: PropTypes.object,
+};
+
+Wrapper.defaultProps = {
+  viewBox: '0 0 20 20',
 };
 
 export default Wrapper;
